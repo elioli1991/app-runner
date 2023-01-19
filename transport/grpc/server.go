@@ -2,7 +2,8 @@ package grpc
 
 import (
 	"context"
-	"github.com/ElioLi-1991/app-runner/transport"
+	"github.com/elioli1991/app-infra/abstract"
+	"github.com/elioli1991/app-runner/transport"
 	"google.golang.org/grpc"
 	"net"
 	"net/url"
@@ -43,6 +44,12 @@ func TimeOut(timeout time.Duration) ServerOption {
 	}
 }
 
+func Logger(l abstract.Logger) ServerOption {
+	return func(o *Server) {
+		o.logger = l
+	}
+}
+
 // NewServer creates a new grpc server
 func NewServer(ctx context.Context, opts ...ServerOption) *Server {
 	srv := &Server{
@@ -54,6 +61,9 @@ func NewServer(ctx context.Context, opts ...ServerOption) *Server {
 	for _, o := range opts {
 		o(srv)
 	}
+	if srv.logger == nil {
+		// TODO : use logger global
+	}
 	return srv
 }
 
@@ -64,6 +74,7 @@ type Server struct {
 	network string
 	address string
 	timeout time.Duration
+	logger  abstract.Logger
 }
 
 func (s *Server) Start(ctx context.Context) error {
