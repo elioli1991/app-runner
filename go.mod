@@ -5,7 +5,7 @@ go 1.18
 require google.golang.org/grpc v1.52.0
 
 require (
-	github.com/elioli1991/app-infra v0.1.0 // indirect
+	github.com/elioli1991/app-infra v0.1.1 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	golang.org/x/net v0.4.0 // indirect
 	golang.org/x/sys v0.3.0 // indirect
