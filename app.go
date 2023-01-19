@@ -1,5 +1,4 @@
 package app_runner
 
-func Run() {
-
+type App struct {
 }
