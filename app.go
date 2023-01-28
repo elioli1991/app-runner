@@ -1,4 +1,3 @@
-package app_runner
+package app
 
-type App struct {
-}
+type App struct{}
